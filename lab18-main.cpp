@@ -28,6 +28,14 @@ int main() {
 
         cout << "Enter your choice: ";
         cin  >> userChoice;
+
+        // 🔧 FIX: prevent infinite menu spam
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            userChoice = 0;
+        }
+
         cout << endl;
 
         switch (userChoice) {
@@ -63,10 +71,14 @@ int main() {
                 delete gPtr;
                 gPtr = nullptr;
                 break;
+
+            default:
+                cout << "Invalid choice.\n";
+                break;
         }
+
     } while (userChoice != EXIT_VALUE);
 
-    // terminate
     return 0;
 }
 
